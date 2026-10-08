@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Dynamic Page Title -->
+    <title id="dynamic-title"></title>
+
+    <!-- Favicon -->
+    <link id="dynamic-favicon" rel="icon" type="image/png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sofia&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SECTION 01: TOP SHIPPING BAR
+    ====================================================== -->
+
+    <div class="shipping-bar">
+        FREE SHIPPING ORDERS OVER $99
+    </div>
+
+
+    <!-- =====================================================
+         SECTION 02: NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <!-- NAVBAR: LOGO IMAGE -->
+            <div class="logo">
+                <img src="pictures/image 2.png" alt="Elevate Natural Hemp Products">
+            </div>
+
+
+            <!-- NAVBAR: NAVIGATION LINKS -->
+            <nav class="nav-links">
+
+                <a href="#products" class="dropdown">
+                    PRODUCTS
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+                <a href="#learn-more" class="dropdown">
+                    LEARN MORE
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+                <a href="#vip-club">VIP CLUB</a>
+
+                <a href="#contact">CONTACT</a>
+
+                <a href="#" id="authBtn">LOGIN</a>
+
+            </nav>
+
+
+            <!-- NAVBAR: ICONS -->
+            <div class="nav-icons">
+
+                <!-- NAVBAR: CART ICON -->
+                <a href="#" id="cartToggle" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+
+                <!-- NAVBAR: CENTER DECORATIVE IMAGE (cart mein product ho to animate hoti hai) -->
+                <img src="pictures/6462990f476598b6fd0c9d5c_little_star.svg.png" alt="Decorative star icon"
+                    class="nav-center-img" id="navStar">
+
+                <!-- NAVBAR: SEARCH ICON -->
+                <a href="#" id="searchToggle" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SEARCH BAR (navbar ke neeche khulta hai)
+    ====================================================== -->
+
+    <div class="search-bar" id="searchBar">
+
+        <div class="search-inner">
+
+            <input type="search" id="searchInput" placeholder="Search products..." autocomplete="off">
+
+            <button type="button" id="searchClose" aria-label="Close search">&times;</button>
+
+        </div>
+
+        <ul class="search-results" id="searchResults"></ul>
+
+    </div>
+
+
+    <!-- =====================================================
+         SECTION 03: PRODUCT INTRO
+    ====================================================== -->
+
+    <section class="product-intro">
+
+        <div class="product-container">
+
+            <h1 class="product-title">
+                DELTA 8 GUMMIES
+            </h1>
+
+            <p class="product-description">
+                Discover the art of calm with our Delta 8 Gummies, where each chew is a masterpiece of relaxation.
+                Infused with the essence of tranquility, these gummies provide a balanced escape into bliss.
+                Savor the rich, nuanced flavors as you embark on a daily journey to serenity and joy
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="main-container">
+
+        <!-- =========================================
+             SECTION 04: PRODUCTS + DISCOUNT
+        ========================================== -->
+
+        <div class="products-wrapper" id="products">
+
+            <!-- PRODUCT LIST -->
+            <div class="product-section">
+
+                <!-- Product 1 -->
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <img src="pictures/image 12.png" alt="Delta 8 THC Gummies Strawberry">
+                    </div>
+
+                    <div class="product-info">
+
+                        <h3>
+                            Delta 8 THC Gummies - Strawberry
+                        </h3>
+
+                        <p class="product-price">
+                            $39.95
+                        </p>
+
+                        <a href="#" class="product-btn">
+                            ADD TO CART
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product 2 -->
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <img src="pictures/image 12.png" alt="Delta 9 THC Gummies Strawberry">
+                    </div>
+
+                    <div class="product-info">
+
+                        <h3>
+                            Delta 9 THC Gummies - Strawberry
+                        </h3>
+
+                        <p class="product-price">
+                            $59.95
+                        </p>
+
+                        <a href="#" class="product-btn">
+                            ADD TO CART
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product 3 -->
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <img src="pictures/image 16.png" alt="DELTA 8 THC VAPE CARTRIDGE">
+                    </div>
+
+                    <div class="product-info">
+
+                        <h3>
+                            DELTA 8 THC VAPE CARTRIDGE - SOUR DIESEL
+                        </h3>
+
+                        <p class="product-price">
+                            $79.95
+                        </p>
+
+                        <a href="#" class="product-btn">
+                            ADD TO CART
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Product 4 -->
+                <div class="product-card">
+
+                    <div class="product-image">
+                        <img src="pictures/image 18.png" alt="Full Spectrum CBD Oil">
+                    </div>
+
+                    <div class="product-info">
+
+                        <h3>
+                            FULL SPECTRUM <br> CBD OIL
+                        </h3>
+
+                        <p class="product-price">
+                            $99.95
+                        </p>
+
+                        <a href="#" class="product-btn">
+                            ADD TO CART
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DISCOUNT BAR -->
+            <div class="discount-section" id="vip-club">
+
+                <div class="discount-text">
+                    TAKE 20% OFF YOUR FIRST ORDER
+                </div>
+
+                <form class="discount-form">
+
+                    <input type="email" placeholder="Enter your email">
+
+                    <button type="submit">
+                        GET DISCOUNT
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             SECTION 05: WHAT ARE DELTA 8 THC GUMMIES?
+             IMAGE LEFT + TEXT RIGHT
+        ========================================== -->
+
+        <div class="next-section" id="learn-more">
+
+            <section class="gummies-info-section">
+
+                <!-- SECTION IMAGE: LEFT -->
+                <div class="gummies-info-image">
+                    <img src="pictures/image 343.png"
+                        alt="Delta 8 THC Gummies product image - What Are Delta 8 THC Gummies">
+                </div>
+
+                <!-- SECTION CONTENT: RIGHT -->
+                <div class="gummies-info-content">
+
+                    <h2>
+                        WHAT ARE DELTA 8<br>
+                        THC GUMMIES?
+                    </h2>
+
+                    <p>
+                        Delta 8 Gummies are edibles infused with Delta 8 THC. Imagine your favorite
+                        gummy candy, but with a special ingredient that can elevate your mood and calm
+                        your mind. They come in various delicious flavors, shapes, and potencies, so there's
+                        something for every palate and preference.
+
+                        <br><br>
+
+                        The reason these gummies have gained such a massive following is their ability to
+                        offer a consistent, controlled experience. Each gummy contains a precise dose of
+                        Delta 8 THC, taking out the guesswork and making dosing straightforward and
+                        stress-free. This is particularly appealing for those who are cautious about their
+                        consumption or those who want to ensure a consistent experience every time.
+
+                        <br><br>
+
+                        They are incredibly discreet, too — no smoke, no smell, no noise. Just a small, tasty
+                        treat that you can slip into your pocket and enjoy whenever you please. This makes
+                        them an excellent choice for people who are on the go or prefer to keep their
+                        wellness routines private.
+
+                        <br><br>
+
+                        For those new to the cannabis world, Delta 8 Gummies can be a gentle
+                        introduction. They offer a less intense experience than other cannabis products,
+                        which can be reassuring for first-timers. And for the connoisseurs, these gummies
+                        provide a different angle to enjoy the benefits of cannabinoids. They can complement
+                        other forms of cannabis consumption or stand alone as a preferred method.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =========================================
+             SECTION 06: EFFECTS OF DELTA 8 GUMMIES
+             TEXT LEFT + IMAGE RIGHT
+        ========================================== -->
+
+        <div class="next-section">
+
+            <section class="gummies-info-section">
+
+                <!-- SECTION CONTENT -->
+                <div class="gummies-info-content">
+
+                    <h2>
+                        EFFECTS OF DELTA 8 GUMMIES?
+                    </h2>
+
+                    <p>
+                        Picture this: you pop a gummy and settle into your favorite spot. As time passes,
+                        you might start to notice a gentle lift in mood and a calming of the mind.
+                        Delta 8 THC is known for its ability to provide smooth and less intense effects.
+
+                        <br><br>
+
+                        So, what can you expect? Users often report feeling a pleasant body sensation
+                        and a sense of calm. It’s like the volume of the world turns down just a tad,
+                        allowing you to relax and enjoy the moment. Some people use these gummies to
+                        help unwind after a long day, while others find them helpful for boosting
+                        creativity or getting into a meditative state.
+
+                        <br><br>
+
+                        But it’s not all about relaxation. Delta 8 can also gently uplift your mood,
+                        making activities more enjoyable and social interactions more engaging. It’s
+                        like a little nudge of positivity, helping you feel more open and connected.
+
+                        <br><br>
+
+                        Of course, everyone’s experience is unique, and factors like your tolerance,
+                        the gummy’s potency, and even your current mood can influence the effects.
+                        Some might feel energized and ready to tackle creative projects, while others
+                        might prefer to chill out and watch the clouds pass by.
+                    </p>
+
+                    <a href="#products" class="buy-now-btn">
+                        BUY NOW
+                    </a>
+
+                </div>
+
+                <!-- SECTION IMAGE -->
+                <div class="gummies-info-image">
+                    <img src="pictures/image 344.png"
+                        alt="Delta 8 THC Gummies product image - Effects of Delta 8 Gummies">
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =========================================
+             SECTION 07: WHY CHOOSE ELEVATE'S DELTA 8 GUMMIES?
+             IMAGE LEFT + TEXT RIGHT
+        ========================================== -->
+
+        <div class="next-section">
+
+            <section class="gummies-info-section">
+
+                <!-- SECTION IMAGE: LEFT -->
+                <div class="gummies-info-image">
+                    <img src="pictures/image 345.png" alt="Delta 8 THC Gummies product image - Why Choose Elevate">
+                </div>
+
+                <!-- SECTION CONTENT: RIGHT -->
+                <div class="gummies-info-content">
+
+                    <h2>
+                        WHY CHOOSE ELEVATE'S DELTA 8 GUMMIES?
+                    </h2>
+
+                    <p>
+                        Our gummies are not just any treat; they are a premium experience wrapped in a
+                        delightful chew. Firstly, it’s about quality. Elevate sources the finest Delta 8
+                        THC, ensuring every gummy delivers a consistent and enjoyable experience. No
+                        surprises, just pure, blissful relaxation.
+
+                        <br><br>
+
+                        But wait, there’s more! Elevate’s gummies burst with irresistible flavors. They’ve
+                        been meticulously crafted to ensure each bite is a taste adventure. And because
+                        we’re all about choices, there’s a variety of flavors to suit every mood and
+                        preference. Plus, their textures? Oh, so satisfyingly chewy!
+
+                        <br><br>
+
+                        Every batch of our Delta 8 gummies is rigorously tested, so you know exactly what
+                        you’re getting — and what you’re not. No nasties, just the good stuff.
+
+                        <br><br>
+
+                        Choosing Elevate means choosing a brand that understands the art of relaxation
+                        and the science of quality. So, if you’re looking for a delicious, reliable, and
+                        top-notch way to enjoy Delta 8, Elevate’s got your back (and your taste buds).
+                    </p>
+
+                    <a href="#products" class="buy-now-btn">
+                        BUY NOW
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =========================================
+             SECTION 08: DOSING DELTA 8 GUMMIES
+             TEXT LEFT + IMAGE RIGHT
+        ========================================== -->
+
+        <div class="next-section">
+
+            <section class="gummies-info-section">
+
+                <!-- SECTION CONTENT -->
+                <div class="gummies-info-content">
+
+                    <h2>
+                        DOSING DELTA 8 GUMMIES
+                    </h2>
+
+                    <p>
+                        Navigating the world of hemp derived products like Delta 8 Gummies can be a bit
+                        like finding the perfect spice level for your meal — it’s all about personal
+                        preference and a bit of experimentation. But don’t worry, we’ll walk you through it.
+
+                        <br><br>
+
+                        It’s important to understand that the effects of Delta 8 can vary based on several
+                        factors like your body weight, tolerance, and the potency of the gummies. Elevate
+                        gummies come with clear dosing instructions, so you’ll always know how much Delta 8
+                        you’re consuming.
+
+                        <br><br>
+
+                        If you’re new to the scene, the golden rule is “start low and go slow.” Begin with
+                        a small dose, perhaps half a gummy or even less. Wait and see how you feel after
+                        about an hour or so. Delta 8 is known for its milder effects, but everyone’s
+                        experience is unique.
+
+                        <br><br>
+
+                        As you become more familiar with how Delta 8 affects you, you might decide to up
+                        the dose for a stronger effect or stick to a smaller dose for a gentle, daily
+                        unwind. Remember, the journey is all about finding what works for you.
+
+                        <br><br>
+
+                        Elevate’s hemp products, including Delta 8 Gummies made from hemp cannabis raw
+                        extracts, adhere to federal law and the
+                        <a href="https://www.fda.gov/news-events/congressional-testimony/hemp-production-and-2018-farm-bill-07252019"
+                            target="_blank" rel="noopener noreferrer">2018 Farm Bill</a>,
+                        ensuring they are federally legal. While our products are derived from the cannabis
+                        plant, we rigorously test to eliminate potentially harmful substances or by-products,
+                        prioritizing your safety.
+
+                        <br><br>
+
+                        Be aware of the chemical structure of cannabinoids and consult national poison
+                        control centers for information on serious health risks. Choose responsibly sourced
+                        hemp products to avoid potentially harmful chemicals and ensure a safe experience.
+                    </p>
+
+                    <a href="#products" class="buy-now-btn">
+                        BUY NOW
+                    </a>
+
+                </div>
+
+                <!-- SECTION IMAGE -->
+                <div class="gummies-info-image">
+                    <img src="pictures/image 346.png" alt="Delta 8 THC Gummies product image - Dosing Delta 8 Gummies">
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         SECTION 09: CUSTOMER REVIEWS
+    ========================================== -->
+
+    <section class="reviews-section" id="reviews">
+
+        <div class="reviews-container">
+
+            <h2 class="reviews-title">
+                CUSTOMER REVIEWS
+            </h2>
+
+            <div class="reviews-slider">
+
+                <div class="reviews-track">
+
+                    <!-- Review: John Doe -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji.png" alt="John Doe">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>John Doe</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Ralph Edwards -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (1).png" alt="Ralph Edwards">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Ralph Edwards</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Darlene Robertson -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (2).png" alt="Darlene Robertson">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Darlene Robertson</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: John Doe -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji.png" alt="John Doe">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>John Doe</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Ralph Edwards -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (1).png" alt="Ralph Edwards">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Ralph Edwards</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Darlene Robertson -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (2).png" alt="Darlene Robertson">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Darlene Robertson</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: John Doe -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji.png" alt="John Doe">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>John Doe</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Ralph Edwards -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (1).png" alt="Ralph Edwards">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Ralph Edwards</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Review: Darlene Robertson -->
+                    <div class="review-card">
+
+                        <div class="review-top">
+
+                            <div class="review-user">
+
+                                <div class="review-avatar">
+                                    <img src="pictures/memoji (2).png" alt="Darlene Robertson">
+                                </div>
+
+                                <div class="review-user-info">
+                                    <h4>Darlene Robertson</h4>
+
+                                    <span>
+                                        Verified Buyer
+                                        <i class="verified-icon">✓</i>
+                                    </span>
+                                </div>
+
+                            </div>
+
+                            <div class="review-stars">
+                                ★ ★ ★ ★ ★
+                            </div>
+
+                        </div>
+
+
+                        <p class="review-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis nostrud.
+                        </p>
+
+
+                        <div class="review-product">
+
+                            <img src="pictures/small.png" alt="1500mg Delta 8 Gummies">
+
+                            <div>
+                                <strong>Reviewing :</strong>
+                                <span>1500mg Delta 8 Gummies</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- REVIEW SLIDER DOTS (JS khud 3 dots banata hai) -->
+            <div class="reviews-dots">
+                <button class="review-dot active" aria-label="Go to review slide 1"></button>
+                <button class="review-dot" aria-label="Go to review slide 2"></button>
+                <button class="review-dot" aria-label="Go to review slide 3"></button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SECTION 10: FREQUENTLY ASKED QUESTIONS
+    ========================================== -->
+
+    <section class="faq-section" id="faq">
+
+        <div class="faq-container">
+
+            <h2 class="faq-title">
+                FREQUENTLY ASKED QUESTIONS
+            </h2>
+
+            <div class="faq-list">
+
+                <!-- FAQ 1 -->
+                <div class="faq-item active">
+                    <button class="faq-question" type="button">
+                        <span>HOW LONG FOR DELTA 8 GUMMIES TO KICK IN?</span>
+                        <span class="faq-icon">−</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Typically, Delta 8 Gummies take about 30 minutes to 2 hours
+                            to kick in. The exact time can vary based on your metabolism,
+                            the gummy's potency, and how much you eat that day. Be patient
+                            and wait before taking more.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>HOW LONG DO DELTA 8 GUMMIES EFFECTS LAST?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            The effects of Delta 8 Gummies can vary from person to person
+                            depending on factors such as dosage, tolerance, and individual
+                            body chemistry.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>ARE DELTA 8 THC GUMMIES STRONG?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Delta 8 Gummies can provide different levels of effects
+                            depending on the potency and amount consumed. Always follow
+                            the product's recommended serving instructions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>HOW MUCH DELTA 8 THC IS IN OUR DELTA 8 GUMMIES?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            The amount of Delta 8 THC varies by product and serving size.
+                            Please check the product label for the exact amount per gummy
+                            and serving.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <button class="faq-question" type="button">
+                        <span>ARE DELTA 8 GUMMIES SAFE?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Delta 8 products can affect people differently. Review the
+                            product information carefully and follow the recommended
+                            serving instructions.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         SECTION 11: FOOTER
+    ========================================== -->
+
+    <footer class="site-footer" id="contact">
+
+        <div class="footer-container">
+
+            <!-- FOOTER: BRAND / LOGO + DESCRIPTION -->
+            <div class="footer-brand">
+
+                <img src="pictures/image 2.png" alt="Elevate Natural Hemp Products logo" class="footer-logo">
+
+                <p>
+                    At ELEVATE, we firmly believe that many
+                    forms of cannabis, used responsibly, benefits
+                    our consumer's well being. We are
+                    committed to our research to not only
+                    provide the best products but also support
+                    you in your journey to wellness.
+                </p>
+
+            </div>
+
+            <!-- FOOTER: SHOP LINKS -->
+            <div class="footer-column">
+
+                <h3>SHOP</h3>
+
+                <a href="#products">SHOP DELTA 8</a>
+                <a href="#products">SHOP DELTA 9</a>
+                <a href="#products">SHOP DELTA 10</a>
+                <a href="#products">SHOP CBD</a>
+                <a href="#products">SHOP HHC</a>
+                <a href="#products">HHC VAPE CARTS</a>
+                <a href="#products">SHOP THC</a>
+                <a href="#products">SHOP THCV</a>
+                <a href="#products">SHOP LIVE RESIN</a>
+                <a href="#products">BUNDLES</a>
+                <a href="#products">ACCESSORIES</a>
+                <a href="#products">SHOP AMANITA</a>
+
+            </div>
+
+            <!-- FOOTER: LEARN LINKS -->
+            <div class="footer-column">
+
+                <h3>LEARN</h3>
+
+                <a href="#">LAB TEST</a>
+                <a href="#">BLOG</a>
+                <a href="#">BUYERS GUIDE</a>
+
+            </div>
+
+            <!-- FOOTER: COMPANY LINKS -->
+            <div class="footer-column">
+
+                <h3>COMPANY</h3>
+
+                <a href="#">WHY CHOOSE ELEVATE?</a>
+                <a href="#">MY ACCOUNT</a>
+                <a href="#">CART</a>
+                <a href="#faq">FAQ</a>
+
+            </div>
+
+            <!-- FOOTER: CONTACT LINKS -->
+            <div class="footer-column footer-contact">
+
+                <h3>CONTACT US</h3>
+
+                <span>PHONE: (877) 355-0033</span>
+
+                <a href="mailto:support@elevateight.com">
+                    ✉ support@elevateight.com
+                </a>
+
+                <span>LOGIN</span>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+
+                    <a href="#" aria-label="X">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER: DISCLOSURE -->
+        <div class="footer-disclosure">
+
+            <p>
+                *All products are Federal Farm Bill Compliant and contain less than
+                0.3% THC.
+            </p>
+
+            <p>
+                FDA DISCLOSURE: The statements regarding these products have not been
+                evaluated by the FDA. These products are not intended to diagnose,
+                treat, cure, or prevent any disease, consult your health physician
+                before use. The Federal Food, Drug and Cosmetic Act requires
+                placement of this notice.
+            </p>
+
+            <p>
+                <strong>WARNING:</strong> Smoking or consuming cannabis or hemp products
+                can expose you to chemicals which are known to the State of California
+                to cause cancer; methanol, which is known to the State of California
+                to cause birth defects or other reproductive harm; and Δ9-
+                tetrahydrocannabinol, which is known to the State of California to
+                cause reproductive harm. For more information please visit
+                www.P65Warnings.ca.gov
+            </p>
+
+        </div>
+
+
+        <!-- FOOTER: BOTTOM LINKS -->
+        <div class="footer-bottom">
+            <a href="#">Affiliates</a>
+            <a href="#">Wholesale</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Refund/Return Policy</a>
+            <a href="#">Terms of Services</a>
+            <a href="#">Sitemap</a>
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================
+         CART PAGE / DRAWER
+    ========================================== -->
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button type="button" id="cartClose" aria-label="Close cart">&times;</button>
+        </div>
+
+        <ul class="cart-items" id="cartItems"></ul>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <a href="#" class="cart-checkout">Checkout</a>
+        </div>
+
+    </aside>
+
+   <div id="authOverlay" class="auth-overlay">
+  <div class="auth-box">
+    <button type="button" class="auth-close" id="authClose">&times;</button>
+    <p class="auth-notice" id="authNotice">Signup required for more access</p>
+
+    <div class="auth-tabs">
+      <button type="button" id="tabSignup" class="active">Sign Up</button>
+      <button type="button" id="tabSignin">Sign In</button>
+    </div>
+
+    <form id="signupForm">
+      <input type="text" name="name" placeholder="Full Name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+      <div class="pass-wrap">
+        <input type="password" name="password" placeholder="Password (min 6)" minlength="6" autocomplete="new-password" required>
+        <button type="button" class="toggle-pass" aria-label="Show password">
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <form id="signinForm" style="display:none">
+      <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+      <div class="pass-wrap">
+        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="button" class="toggle-pass" aria-label="Show password">
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </div>
+      <a href="#" id="forgotLink" class="forgot-link">Forgot password?</a>
+      <button type="submit">Sign In</button>
+    </form>
+
+    <p class="auth-error" id="authError"></p>
+  </div>
+</div>
+<div id="welcomeToast" class="welcome-toast"></div>
+
+<script type="module" src="auth.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
