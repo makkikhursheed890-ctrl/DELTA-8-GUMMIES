@@ -961,3 +961,230 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+/* =========================================================
+   DELTA 8 PULL TO REFRESH
+========================================================= */
+
+const deltaPullRefresh =
+    document.getElementById("deltaPullRefresh");
+
+const deltaRefreshText =
+    document.getElementById("deltaRefreshText");
+
+
+let deltaStartY = 0;
+let deltaPulling = false;
+let deltaRefreshing = false;
+
+const DELTA_PULL_LIMIT = 70;
+
+
+/* =========================================================
+   TOUCH START
+========================================================= */
+
+document.addEventListener(
+    "touchstart",
+    function (e) {
+
+        /* Sirf page ke top par kaam kare */
+
+        if (window.scrollY > 0) return;
+
+        if (deltaRefreshing) return;
+
+        deltaStartY =
+            e.touches[0].clientY;
+
+        deltaPulling = true;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   TOUCH MOVE
+========================================================= */
+
+document.addEventListener(
+    "touchmove",
+    function (e) {
+
+        if (!deltaPulling) return;
+
+        if (deltaRefreshing) return;
+
+        if (window.scrollY > 0) {
+
+            deltaPulling = false;
+
+            return;
+        }
+
+
+        const currentY =
+            e.touches[0].clientY;
+
+
+        const distance =
+            currentY - deltaStartY;
+
+
+        /* User upar swipe kare */
+
+        if (distance <= 0) {
+
+            deltaPullRefresh.style.height = "0px";
+
+            deltaPullRefresh.classList.remove(
+                "active",
+                "ready"
+            );
+
+            return;
+        }
+
+
+        /*
+           Pull distance ko slow rakhein
+           taake Nayapay jaisa feel aaye
+        */
+
+        const pullDistance =
+            Math.min(
+                distance * 0.55,
+                DELTA_PULL_LIMIT
+            );
+
+
+        deltaPullRefresh.style.height =
+            `${pullDistance}px`;
+
+
+        deltaPullRefresh.classList.add(
+            "active"
+        );
+
+
+        /* =================================================
+           READY STATE
+        ================================================= */
+
+        if (pullDistance >= DELTA_PULL_LIMIT) {
+
+            deltaPullRefresh.classList.add(
+                "ready"
+            );
+
+            deltaRefreshText.textContent =
+                "Release to refresh";
+
+        } else {
+
+            deltaPullRefresh.classList.remove(
+                "ready"
+            );
+
+            deltaRefreshText.textContent =
+                "Pull to refresh";
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   TOUCH END
+========================================================= */
+
+document.addEventListener(
+    "touchend",
+    function () {
+
+        if (!deltaPulling) return;
+
+        deltaPulling = false;
+
+
+        if (deltaRefreshing) return;
+
+
+        const currentHeight =
+            parseInt(
+                getComputedStyle(
+                    deltaPullRefresh
+                ).height
+            ) || 0;
+
+
+        /* =================================================
+           USER PULLED ENOUGH
+        ================================================= */
+
+        if (currentHeight >= DELTA_PULL_LIMIT) {
+
+            deltaRefreshing = true;
+
+
+            deltaPullRefresh.style.height =
+                "65px";
+
+
+            deltaPullRefresh.classList.add(
+                "refreshing"
+            );
+
+
+            deltaRefreshText.textContent =
+                "Refreshing...";
+
+
+            /*
+               Thora delay taake animation
+               user ko nazar aaye
+            */
+
+            setTimeout(
+                function () {
+
+                    window.location.reload();
+
+                },
+                700
+            );
+
+
+        } else {
+
+            /* =================================================
+               PULL COMPLETE NAHI HUA
+            ================================================= */
+
+            deltaPullRefresh.style.height =
+                "0px";
+
+
+            deltaPullRefresh.classList.remove(
+                "active",
+                "ready"
+            );
+
+
+            deltaRefreshText.textContent =
+                "Pull to refresh";
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
