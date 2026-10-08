@@ -1848,6 +1848,7 @@ html {
 }
 .auth-box .forgot-link:hover {
   color: #111;
+<<<<<<< HEAD
 }
 .logout-confirm {
     position: fixed;
@@ -2012,4 +2013,6 @@ html {
         height: 30px;
     }
 
+=======
+>>>>>>> parent of 974dba0 (Updated website)
 }
