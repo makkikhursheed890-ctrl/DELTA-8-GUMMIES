@@ -1,0 +1,1446 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Panel</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f7;
+            color: #222;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .admin-header {
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 5%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .admin-header h1 {
+            font-size: 27px;
+        }
+
+
+        .admin-header p {
+            margin-top: 6px;
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        .back-btn {
+            background: #2c514e;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-container {
+            min-height: 80vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+
+            background: #fff;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .login-box h2 {
+            margin-bottom: 10px;
+        }
+
+
+        .login-box p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+
+        .login-box input {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+
+        .login-box button {
+            width: 100%;
+
+            border: none;
+
+            background: #2c514e;
+            color: #fff;
+
+            padding: 14px;
+
+            border-radius: 7px;
+
+            margin-top: 12px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .login-error {
+            color: #c0392b;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            width: 94%;
+            max-width: 1400px;
+
+            margin: 30px auto;
+
+            display: none;
+        }
+
+
+        .dashboard-top {
+            background: #fff;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        .dashboard-top h2 {
+            font-size: 22px;
+        }
+
+
+        .dashboard-top p {
+            color: #777;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+
+        .refresh-btn {
+            border: none;
+
+            background: #2c514e;
+            color: #fff;
+
+            padding: 10px 16px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           ORDER CARD
+        ========================= */
+
+        .orders-container {
+            display: grid;
+            gap: 20px;
+        }
+
+
+        .order-card {
+            background: #fff;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .order-top {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding-bottom: 15px;
+
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .order-id {
+            font-size: 13px;
+            color: #777;
+
+            word-break: break-all;
+        }
+
+
+        .order-date {
+            font-size: 13px;
+            color: #777;
+
+            margin-top: 5px;
+        }
+
+
+        .status {
+            background: #e9f5ef;
+
+            color: #26734d;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           CUSTOMER INFO
+        ========================= */
+
+        .customer-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            padding: 18px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+
+        .info-box {
+            background: #f8f8f8;
+
+            padding: 12px;
+
+            border-radius: 7px;
+        }
+
+
+        .info-box strong {
+            display: block;
+
+            font-size: 12px;
+
+            color: #777;
+
+            margin-bottom: 5px;
+        }
+
+
+        .info-box span {
+            font-size: 14px;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .products-title {
+            margin: 18px 0 10px;
+
+            font-size: 16px;
+        }
+
+
+        .product-row {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+
+        .product-row img {
+            width: 55px;
+            height: 55px;
+
+            object-fit: cover;
+
+            border-radius: 6px;
+
+            background: #eee;
+        }
+
+
+        .product-details {
+            flex: 1;
+        }
+
+
+        .product-details h4 {
+            font-size: 14px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .product-details p {
+            font-size: 13px;
+
+            color: #777;
+        }
+
+
+        .product-total {
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ORDER TOTALS
+        ========================= */
+
+        .order-footer {
+            margin-top: 15px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #ddd;
+
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+
+        .totals {
+            width: 260px;
+        }
+
+
+        .total-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 6px 0;
+
+            font-size: 14px;
+        }
+
+
+        .total-row.final {
+            border-top: 1px solid #ddd;
+
+            margin-top: 5px;
+
+            padding-top: 12px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           NO ORDERS
+        ========================= */
+
+        .no-orders {
+            background: #fff;
+
+            padding: 50px 20px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            color: #777;
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            background: #fff;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            color: #777;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .admin-header {
+                align-items: flex-start;
+            }
+
+
+            .admin-header h1 {
+                font-size: 22px;
+            }
+
+
+            .dashboard-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+
+            .customer-info {
+                grid-template-columns: 1fr;
+            }
+
+
+            .order-top {
+                flex-direction: column;
+            }
+
+
+            .order-footer {
+                justify-content: flex-start;
+            }
+
+
+            .totals {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="admin-header">
+
+        <div>
+
+            <h1>
+                Admin Panel
+            </h1>
+
+            <p>
+                Customer Orders Dashboard
+            </p>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="back-btn"
+        >
+            Store
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         ADMIN LOGIN
+    ========================= -->
+
+    <section
+        class="login-container"
+        id="loginContainer"
+    >
+
+        <div class="login-box">
+
+            <h2>
+                Admin Login
+            </h2>
+
+            <p>
+                Enter your admin password to view orders.
+            </p>
+
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Admin password"
+            >
+
+
+            <button
+                type="button"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+
+            <div
+                class="login-error"
+                id="loginError"
+            >
+                Incorrect admin password.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
+
+    <main
+        class="dashboard"
+        id="dashboard"
+    >
+
+        <div class="dashboard-top">
+
+            <div>
+
+                <h2>
+                    Customer Orders
+                </h2>
+
+                <p id="orderCount">
+                    Loading orders...
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshBtn"
+            >
+                Refresh Orders
+            </button>
+
+        </div>
+
+
+        <div
+            class="orders-container"
+            id="ordersContainer"
+        >
+
+            <div class="loading">
+                Loading orders...
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FIREBASE
+    ========================= -->
+
+    <script type="module">
+
+        /* =========================================
+           FIREBASE IMPORTS
+        ========================================= */
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            query,
+            orderBy
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+
+        /* =========================================
+           FIREBASE CONFIG
+        ========================================= */
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyC_qydbDcYURlx4NjhSsnxnrI-5mAFFRec",
+
+            authDomain: "delta-8-gummies.firebaseapp.com",
+
+            projectId: "delta-8-gummies",
+
+            storageBucket: "delta-8-gummies.firebasestorage.app",
+
+            messagingSenderId: "271896761472",
+
+            appId: "1:271896761472:web:5745400dce7b732220c265",
+
+            measurementId: "G-XEQRNRD24F"
+
+        };
+
+
+        /* =========================================
+           FIREBASE INITIALIZE
+        ========================================= */
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const db =
+            getFirestore(app);
+
+
+        /* =========================================
+           ADMIN PASSWORD
+        ========================================= */
+
+        const ADMIN_PASSWORD =
+            "7890Makki$";
+
+
+        /* =========================================
+           ELEMENTS
+        ========================================= */
+
+        const loginContainer =
+            document.getElementById(
+                "loginContainer"
+            );
+
+
+        const dashboard =
+            document.getElementById(
+                "dashboard"
+            );
+
+
+        const adminPassword =
+            document.getElementById(
+                "adminPassword"
+            );
+
+
+        const loginBtn =
+            document.getElementById(
+                "loginBtn"
+            );
+
+
+        const loginError =
+            document.getElementById(
+                "loginError"
+            );
+
+
+        const ordersContainer =
+            document.getElementById(
+                "ordersContainer"
+            );
+
+
+        const orderCount =
+            document.getElementById(
+                "orderCount"
+            );
+
+
+        const refreshBtn =
+            document.getElementById(
+                "refreshBtn"
+            );
+
+
+        /* =========================================
+           LOGIN
+        ========================================= */
+
+        function login() {
+
+            if (
+                adminPassword.value ===
+                ADMIN_PASSWORD
+            ) {
+
+                loginContainer.style.display =
+                    "none";
+
+                dashboard.style.display =
+                    "block";
+
+                sessionStorage.setItem(
+                    "admin_logged_in",
+                    "true"
+                );
+
+                loadOrders();
+
+            } else {
+
+                loginError.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        loginBtn.addEventListener(
+            "click",
+            login
+        );
+
+
+        adminPassword.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    login();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           CHECK EXISTING LOGIN
+        ========================================= */
+
+        if (
+            sessionStorage.getItem(
+                "admin_logged_in"
+            ) === "true"
+        ) {
+
+            loginContainer.style.display =
+                "none";
+
+            dashboard.style.display =
+                "block";
+
+            loadOrders();
+
+        }
+
+
+        /* =========================================
+           LOAD ORDERS
+        ========================================= */
+
+        async function loadOrders() {
+
+            ordersContainer.innerHTML = `
+
+                <div class="loading">
+                    Loading orders...
+                </div>
+
+            `;
+
+
+            try {
+
+                let snapshot;
+
+
+                /* =================================
+                   NEWEST ORDERS FIRST
+                ================================= */
+
+                try {
+
+                    const ordersQuery =
+                        query(
+                            collection(
+                                db,
+                                "orders"
+                            ),
+                            orderBy(
+                                "createdAt",
+                                "desc"
+                            )
+                        );
+
+
+                    snapshot =
+                        await getDocs(
+                            ordersQuery
+                        );
+
+                } catch (sortError) {
+
+                    console.warn(
+                        "Could not sort orders. Loading normally.",
+                        sortError
+                    );
+
+
+                    snapshot =
+                        await getDocs(
+                            collection(
+                                db,
+                                "orders"
+                            )
+                        );
+
+                }
+
+
+                if (snapshot.empty) {
+
+                    orderCount.textContent =
+                        "0 orders found";
+
+
+                    ordersContainer.innerHTML = `
+
+                        <div class="no-orders">
+
+                            <h3>
+                                No Orders Yet
+                            </h3>
+
+                            <p style="margin-top:8px;">
+                                Customer orders will appear here.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                orderCount.textContent =
+                    snapshot.size +
+                    " order" +
+                    (snapshot.size === 1
+                        ? ""
+                        : "s") +
+                    " found";
+
+
+                ordersContainer.innerHTML = "";
+
+
+                snapshot.forEach(function(doc) {
+
+                    const order =
+                        doc.data();
+
+
+                    const card =
+                        createOrderCard(
+                            doc.id,
+                            order
+                        );
+
+
+                    ordersContainer.appendChild(
+                        card
+                    );
+
+                });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Could not load orders:",
+                    error
+                );
+
+
+                orderCount.textContent =
+                    "Could not load orders";
+
+
+                ordersContainer.innerHTML = `
+
+                    <div class="no-orders">
+
+                        <h3>
+                            Firebase Error
+                        </h3>
+
+                        <p style="margin-top:10px;">
+                            ${escapeHTML(error.message)}
+                        </p>
+
+                        <p style="margin-top:10px;">
+                            Check your Firestore database and security rules.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================================
+           CREATE ORDER CARD
+        ========================================= */
+
+        function createOrderCard(
+            orderId,
+            order
+        ) {
+
+            const card =
+                document.createElement("article");
+
+
+            card.className =
+                "order-card";
+
+
+            const customer =
+                order.customer || {};
+
+
+            const products =
+                Array.isArray(order.products)
+                    ? order.products
+                    : [];
+
+
+            let dateText =
+                "Date unavailable";
+
+
+            if (
+                order.createdAt &&
+                typeof order.createdAt.toDate ===
+                "function"
+            ) {
+
+                dateText =
+                    order.createdAt
+                        .toDate()
+                        .toLocaleString();
+
+            }
+
+
+            /* =================================
+               PRODUCTS HTML
+            ================================= */
+
+            let productsHTML = "";
+
+
+            products.forEach(function(product) {
+
+                const price =
+                    Number(product.price) || 0;
+
+
+                const qty =
+                    Number(product.qty) || 1;
+
+
+                const itemTotal =
+                    price * qty;
+
+
+                productsHTML += `
+
+                    <div class="product-row">
+
+                        <img
+                            src="${escapeAttribute(
+                                product.image || ""
+                            )}"
+                            alt="${escapeAttribute(
+                                product.title || "Product"
+                            )}"
+                            onerror="this.style.display='none'"
+                        >
+
+                        <div class="product-details">
+
+                            <h4>
+                                ${escapeHTML(
+                                    product.title ||
+                                    "Product"
+                                )}
+                            </h4>
+
+                            <p>
+                                ${formatPrice(price)}
+                                ×
+                                ${qty}
+                            </p>
+
+                        </div>
+
+                        <div class="product-total">
+
+                            ${formatPrice(
+                                itemTotal
+                            )}
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            /* =================================
+               ORDER CARD
+            ================================= */
+
+            card.innerHTML = `
+
+                <div class="order-top">
+
+                    <div>
+
+                        <div class="order-id">
+
+                            Order ID:
+                            ${escapeHTML(orderId)}
+
+                        </div>
+
+                        <div class="order-date">
+
+                            ${escapeHTML(dateText)}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status">
+
+                        ${escapeHTML(
+                            order.status ||
+                            "New"
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="customer-info">
+
+                    <div class="info-box">
+
+                        <strong>
+                            Customer Name
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                (
+                                    customer.firstName ||
+                                    ""
+                                ) +
+                                " " +
+                                (
+                                    customer.lastName ||
+                                    ""
+                                )
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Phone
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.phone ||
+                                "-"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Email
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.email ||
+                                "-"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            City
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.city ||
+                                "-"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Address
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.address ||
+                                "-"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Postal Code
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                customer.postalCode ||
+                                "-"
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <strong>
+                            Payment Method
+                        </strong>
+
+                        <span>
+
+                            ${escapeHTML(
+                                formatPayment(
+                                    order.paymentMethod
+                                )
+                            )}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <h3 class="products-title">
+                    Products
+                </h3>
+
+
+                <div>
+
+                    ${productsHTML}
+
+                </div>
+
+
+                <div class="order-footer">
+
+                    <div class="totals">
+
+                        <div class="total-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong>
+                                ${formatPrice(
+                                    order.subtotal || 0
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span>
+                                Shipping
+                            </span>
+
+                            <strong>
+
+                                ${
+                                    Number(order.shipping) === 0
+                                        ? "FREE"
+                                        : formatPrice(
+                                            order.shipping || 0
+                                        )
+                                }
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="total-row final">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong>
+                                ${formatPrice(
+                                    order.total || 0
+                                )}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            return card;
+
+        }
+
+
+        /* =========================================
+           PAYMENT NAME
+        ========================================= */
+
+        function formatPayment(payment) {
+
+            const names = {
+
+                card:
+                    "Credit / Debit Card",
+
+                easypaisa:
+                    "Easypaisa",
+
+                jazzcash:
+                    "JazzCash",
+
+                cod:
+                    "Cash on Delivery"
+
+            };
+
+
+            return names[payment] ||
+                   payment ||
+                   "Unknown";
+
+        }
+
+
+        /* =========================================
+           FORMAT PRICE
+        ========================================= */
+
+        function formatPrice(price) {
+
+            return "$" +
+                Number(price || 0)
+                    .toFixed(2);
+
+        }
+
+
+        /* =========================================
+           SECURITY HELPERS
+        ========================================= */
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function escapeAttribute(value) {
+
+            return escapeHTML(value);
+
+        }
+
+
+        /* =========================================
+           REFRESH
+        ========================================= */
+
+        refreshBtn.addEventListener(
+            "click",
+            loadOrders
+        );
+
+    </script>
+
+</body>
+</html>
+
