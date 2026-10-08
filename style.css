@@ -27,6 +27,7 @@ body {
   background: #f0f0f0;
   color: #17181b;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -129,7 +130,8 @@ html {
   text-decoration: none;
   font-size: 16px;
   line-height: 24px;
-  transition: opacity 0.2s ease; /* same hover animation as nav links */
+  transition: opacity 0.2s ease;
+  /* same hover animation as nav links */
 }
 
 .nav-icons a:hover {
@@ -162,6 +164,7 @@ html {
   .logo {
     height: auto;
   }
+
   .logo img {
     width: 65px;
   }
@@ -476,7 +479,8 @@ html {
   border: none;
   outline: none;
   background: transparent;
-  color: #1877f2; /* Input text blue */
+  color: #1877f2;
+  /* Input text blue */
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
@@ -497,7 +501,8 @@ html {
   line-height: 20px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s ease; /* same hover animation as other buttons */
+  transition: background 0.2s ease;
+  /* same hover animation as other buttons */
 }
 
 .discount-form button:hover {
@@ -1176,7 +1181,8 @@ html {
 }
 
 .footer-column a {
-  transition: color 0.2s ease; /* same hover animation style */
+  transition: color 0.2s ease;
+  /* same hover animation style */
 }
 
 .footer-column a:hover {
@@ -1210,6 +1216,7 @@ html {
   font-weight: 700;
   transition: background 0.2s ease;
 }
+
 /* Facebook */
 .social-icons a:nth-child(1):hover {
   color: #1877f2;
@@ -1233,6 +1240,7 @@ html {
   color: #000000;
   transform: translateY(-2px);
 }
+
 /* Disclosure box */
 .footer-disclosure {
   width: 100%;
@@ -1425,10 +1433,12 @@ html {
     transform: scale(1) rotate(0deg);
     filter: drop-shadow(0 0 0 rgba(7, 155, 152, 0));
   }
+
   50% {
     transform: scale(1.6) rotate(180deg);
     filter: drop-shadow(0 0 6px rgba(7, 155, 152, 0.9));
   }
+
   100% {
     transform: scale(1) rotate(360deg);
     filter: drop-shadow(0 0 0 rgba(7, 155, 152, 0));
@@ -1718,6 +1728,7 @@ html {
     line-height: 12px;
   }
 }
+
 .auth-overlay {
   position: fixed;
   inset: 0;
@@ -1727,9 +1738,11 @@ html {
   justify-content: center;
   z-index: 99999;
 }
+
 .auth-overlay.show {
   display: flex;
 }
+
 .auth-box {
   background: #fff;
   width: 92%;
@@ -1738,6 +1751,7 @@ html {
   border-radius: 12px;
   position: relative;
 }
+
 .auth-close {
   position: absolute;
   top: 8px;
@@ -1747,6 +1761,7 @@ html {
   border: 0;
   cursor: pointer;
 }
+
 .auth-notice {
   background: #fff3cd;
   color: #856404;
@@ -1756,11 +1771,13 @@ html {
   margin: 0 0 16px;
   font-weight: 600;
 }
+
 .auth-tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 14px;
 }
+
 .auth-tabs button {
   flex: 1;
   padding: 10px;
@@ -1769,14 +1786,17 @@ html {
   cursor: pointer;
   border-radius: 6px;
 }
+
 .auth-tabs button.active {
   background: #111;
   color: #fff;
 }
+
 .auth-tabs button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
 }
+
 .auth-box input {
   width: 100%;
   padding: 11px;
@@ -1785,6 +1805,7 @@ html {
   border-radius: 6px;
   box-sizing: border-box;
 }
+
 .auth-box form button {
   width: 100%;
   padding: 12px;
@@ -1794,12 +1815,14 @@ html {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .auth-error {
   color: #c00;
   font-size: 14px;
   min-height: 18px;
   margin: 8px 0 0;
 }
+
 .welcome-toast {
   position: fixed;
   top: 20px;
@@ -1811,15 +1834,18 @@ html {
   z-index: 100000;
   display: none;
 }
+
 /* Password box + eye icon */
 .auth-box .pass-wrap {
   position: relative;
   margin-bottom: 10px;
 }
+
 .auth-box .pass-wrap input {
   margin-bottom: 0;
   padding-right: 44px;
 }
+
 .auth-box form .toggle-pass {
   position: absolute;
   right: 6px;
@@ -1833,6 +1859,7 @@ html {
   border-radius: 0;
   cursor: pointer;
 }
+
 .auth-box form .toggle-pass:hover {
   color: #111;
 }
@@ -1846,6 +1873,64 @@ html {
   margin: -2px 0 12px;
   text-decoration: underline;
 }
+
 .auth-box .forgot-link:hover {
   color: #111;
+}
+
+.logout-confirm {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.logout-confirm.show {
+  display: flex;
+}
+
+.logout-confirm-box {
+  width: min(90%, 380px);
+  padding: 28px;
+  background: #fff;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.logout-confirm-box h3 {
+  margin: 0 0 10px;
+  color: #2c514e;
+}
+
+.logout-confirm-box p {
+  margin-bottom: 22px;
+  color: #555;
+}
+
+.logout-confirm-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.logout-confirm-buttons button {
+  border: none;
+  padding: 11px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#cancelLogout {
+  background: #eee;
+  color: #333;
+}
+
+#confirmLogout {
+  background: #2c514e;
+  color: #fff;
 }
