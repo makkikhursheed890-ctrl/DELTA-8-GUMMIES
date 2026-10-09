@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Admin Panel</title>
 
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -511,7 +507,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -539,10 +534,7 @@
         </div>
 
 
-        <a
-            href="index.html"
-            class="back-btn"
-        >
+        <a href="index.html" class="back-btn">
             Store
         </a>
 
@@ -553,10 +545,7 @@
          ADMIN LOGIN
     ========================= -->
 
-    <section
-        class="login-container"
-        id="loginContainer"
-    >
+    <section class="login-container" id="loginContainer">
 
         <div class="login-box">
 
@@ -569,25 +558,15 @@
             </p>
 
 
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Admin password"
-            >
+            <input type="password" id="adminPassword" placeholder="Admin password">
 
 
-            <button
-                type="button"
-                id="loginBtn"
-            >
+            <button type="button" id="loginBtn">
                 Login
             </button>
 
 
-            <div
-                class="login-error"
-                id="loginError"
-            >
+            <div class="login-error" id="loginError">
                 Incorrect admin password.
             </div>
 
@@ -600,10 +579,7 @@
          DASHBOARD
     ========================= -->
 
-    <main
-        class="dashboard"
-        id="dashboard"
-    >
+    <main class="dashboard" id="dashboard">
 
         <div class="dashboard-top">
 
@@ -620,21 +596,14 @@
             </div>
 
 
-            <button
-                type="button"
-                class="refresh-btn"
-                id="refreshBtn"
-            >
+            <button type="button" class="refresh-btn" id="refreshBtn">
                 Refresh Orders
             </button>
 
         </div>
 
 
-        <div
-            class="orders-container"
-            id="ordersContainer"
-        >
+        <div class="orders-container" id="ordersContainer">
 
             <div class="loading">
                 Loading orders...
@@ -806,7 +775,7 @@
 
         adminPassword.addEventListener(
             "keydown",
-            function(event) {
+            function (event) {
 
                 if (event.key === "Enter") {
 
@@ -941,7 +910,7 @@
                 ordersContainer.innerHTML = "";
 
 
-                snapshot.forEach(function(doc) {
+                snapshot.forEach(function (doc) {
 
                     const order =
                         doc.data();
@@ -1050,7 +1019,7 @@
             let productsHTML = "";
 
 
-            products.forEach(function(product) {
+            products.forEach(function (product) {
 
                 const price =
                     Number(product.price) || 0;
@@ -1070,11 +1039,11 @@
 
                         <img
                             src="${escapeAttribute(
-                                product.image || ""
-                            )}"
+                    product.image || ""
+                )}"
                             alt="${escapeAttribute(
-                                product.title || "Product"
-                            )}"
+                    product.title || "Product"
+                )}"
                             onerror="this.style.display='none'"
                         >
 
@@ -1082,9 +1051,9 @@
 
                             <h4>
                                 ${escapeHTML(
-                                    product.title ||
-                                    "Product"
-                                )}
+                    product.title ||
+                    "Product"
+                )}
                             </h4>
 
                             <p>
@@ -1098,8 +1067,8 @@
                         <div class="product-total">
 
                             ${formatPrice(
-                                itemTotal
-                            )}
+                    itemTotal
+                )}
 
                         </div>
 
@@ -1139,9 +1108,9 @@
                     <div class="status">
 
                         ${escapeHTML(
-                            order.status ||
-                            "New"
-                        )}
+                order.status ||
+                "New"
+            )}
 
                     </div>
 
@@ -1159,16 +1128,16 @@
                         <span>
 
                             ${escapeHTML(
-                                (
-                                    customer.firstName ||
-                                    ""
-                                ) +
-                                " " +
-                                (
-                                    customer.lastName ||
-                                    ""
-                                )
-                            )}
+                (
+                    customer.firstName ||
+                    ""
+                ) +
+                " " +
+                (
+                    customer.lastName ||
+                    ""
+                )
+            )}
 
                         </span>
 
@@ -1184,9 +1153,9 @@
                         <span>
 
                             ${escapeHTML(
-                                customer.phone ||
-                                "-"
-                            )}
+                customer.phone ||
+                "-"
+            )}
 
                         </span>
 
@@ -1202,9 +1171,9 @@
                         <span>
 
                             ${escapeHTML(
-                                customer.email ||
-                                "-"
-                            )}
+                customer.email ||
+                "-"
+            )}
 
                         </span>
 
@@ -1220,9 +1189,9 @@
                         <span>
 
                             ${escapeHTML(
-                                customer.city ||
-                                "-"
-                            )}
+                customer.city ||
+                "-"
+            )}
 
                         </span>
 
@@ -1238,9 +1207,9 @@
                         <span>
 
                             ${escapeHTML(
-                                customer.address ||
-                                "-"
-                            )}
+                customer.address ||
+                "-"
+            )}
 
                         </span>
 
@@ -1256,9 +1225,9 @@
                         <span>
 
                             ${escapeHTML(
-                                customer.postalCode ||
-                                "-"
-                            )}
+                customer.postalCode ||
+                "-"
+            )}
 
                         </span>
 
@@ -1274,10 +1243,10 @@
                         <span>
 
                             ${escapeHTML(
-                                formatPayment(
-                                    order.paymentMethod
-                                )
-                            )}
+                formatPayment(
+                    order.paymentMethod
+                )
+            )}
 
                         </span>
 
@@ -1310,8 +1279,8 @@
 
                             <strong>
                                 ${formatPrice(
-                                    order.subtotal || 0
-                                )}
+                order.subtotal || 0
+            )}
                             </strong>
 
                         </div>
@@ -1325,13 +1294,12 @@
 
                             <strong>
 
-                                ${
-                                    Number(order.shipping) === 0
-                                        ? "FREE"
-                                        : formatPrice(
-                                            order.shipping || 0
-                                        )
-                                }
+                                ${Number(order.shipping) === 0
+                    ? "FREE"
+                    : formatPrice(
+                        order.shipping || 0
+                    )
+                }
 
                             </strong>
 
@@ -1346,8 +1314,8 @@
 
                             <strong>
                                 ${formatPrice(
-                                    order.total || 0
-                                )}
+                    order.total || 0
+                )}
                             </strong>
 
                         </div>
@@ -1388,8 +1356,8 @@
 
 
             return names[payment] ||
-                   payment ||
-                   "Unknown";
+                payment ||
+                "Unknown";
 
         }
 
@@ -1442,5 +1410,5 @@
     </script>
 
 </body>
-</html>
 
+</html>

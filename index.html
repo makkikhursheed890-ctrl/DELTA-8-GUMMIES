@@ -97,17 +97,17 @@
 
     </header>
 
-  <!-- =========================================================
+    <!-- =========================================================
      DELTA 8 PULL TO REFRESH
 ========================================================= -->
 
-<div id="deltaPullRefresh" class="delta-pull-refresh">
-    <div class="delta-refresh-icon">
-        <i class="fa-solid fa-rotate"></i>
-    </div>
+    <div id="deltaPullRefresh" class="delta-pull-refresh">
+        <div class="delta-refresh-icon">
+            <i class="fa-solid fa-rotate"></i>
+        </div>
 
-    <span id="deltaRefreshText">Pull to refresh</span>
-</div>
+        <span id="deltaRefreshText">Pull to refresh</span>
+    </div>
 
     <!-- =====================================================
          SEARCH BAR (navbar ke neeche khulta hai)
@@ -1280,51 +1280,53 @@
                 <span>Total</span>
                 <strong id="cartTotal">$0.00</strong>
             </div>
-            <a href="checkout.html" class="cart-checkout"  id="cartCheckout">Checkout</a>
+            <a href="checkout.html" class="cart-checkout" id="cartCheckout">Checkout</a>
         </div>
 
     </aside>
 
-   <div id="authOverlay" class="auth-overlay">
-  <div class="auth-box">
-    <button type="button" class="auth-close" id="authClose">&times;</button>
-    <p class="auth-notice" id="authNotice"> signup required for more access</p>
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-box">
+            <button type="button" class="auth-close" id="authClose">&times;</button>
+            <p class="auth-notice" id="authNotice"> signup required for more access</p>
 
-    <div class="auth-tabs">
-      <button type="button" id="tabSignup" class="active">Sign Up</button>
-      <button type="button" id="tabSignin">Sign In</button>
+            <div class="auth-tabs">
+                <button type="button" id="tabSignup" class="active">Sign Up</button>
+                <button type="button" id="tabSignin">Sign In</button>
+            </div>
+
+            <form id="signupForm">
+                <input type="text" name="name" placeholder="Full Name" autocomplete="name" required>
+                <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+                <div class="pass-wrap">
+                    <input type="password" name="password" placeholder="Password (min 6)" minlength="6"
+                        autocomplete="new-password" required>
+                    <button type="button" class="toggle-pass" aria-label="Show password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+
+            <form id="signinForm" style="display:none">
+                <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+                <div class="pass-wrap">
+                    <input type="password" name="password" placeholder="Password" autocomplete="current-password"
+                        required>
+                    <button type="button" class="toggle-pass" aria-label="Show password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+                <a href="#" id="forgotLink" class="forgot-link">Forgot password?</a>
+                <button type="submit">Sign In</button>
+            </form>
+
+            <p class="auth-error" id="authError"></p>
+        </div>
     </div>
+    <div id="welcomeToast" class="welcome-toast"></div>
 
-    <form id="signupForm">
-      <input type="text" name="name" placeholder="Full Name" autocomplete="name" required>
-      <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-      <div class="pass-wrap">
-        <input type="password" name="password" placeholder="Password (min 6)" minlength="6" autocomplete="new-password" required>
-        <button type="button" class="toggle-pass" aria-label="Show password">
-          <i class="fa-solid fa-eye"></i>
-        </button>
-      </div>
-      <button type="submit">Create Account</button>
-    </form>
-
-    <form id="signinForm" style="display:none">
-      <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-      <div class="pass-wrap">
-        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
-        <button type="button" class="toggle-pass" aria-label="Show password">
-          <i class="fa-solid fa-eye"></i>
-        </button>
-      </div>
-      <a href="#" id="forgotLink" class="forgot-link">Forgot password?</a>
-      <button type="submit">Sign In</button>
-    </form>
-
-    <p class="auth-error" id="authError"></p>
-  </div>
-</div>
-<div id="welcomeToast" class="welcome-toast"></div>
-
-<script type="module" src="auth.js"></script>
+    <script type="module" src="auth.js"></script>
     <script src="script.js"></script>
 
 </body>
