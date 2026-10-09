@@ -2043,3 +2043,30 @@ html {
     height: 30px;
   }
 }
+
+/* Chatbot desktop aur mobile dono par visible rahe */
+#ewRoot {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#ewRoot .ew-fab {
+    display: flex !important;
+    position: fixed !important;
+    right: 22px !important;
+    bottom: 22px !important;
+    z-index: 2147483000 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Click karne par chatbot panel khule */
+#ewRoot.ew-open .ew-panel {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 2147483001 !important;
+}

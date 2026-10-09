@@ -466,6 +466,33 @@
 
 
         /* =========================
+           AUTH INFO / ERROR BOX
+        ========================= */
+
+        .error-box {
+            background: #fff;
+            border: 1px solid #f1c0bb;
+            border-radius: 12px;
+            padding: 24px;
+            color: #444;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .error-box h3 {
+            color: #b42318;
+            margin-bottom: 10px;
+        }
+
+        .error-box code {
+            background: #f3f3f3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
+
+        /* =========================
            MOBILE
         ========================= */
 
@@ -507,6 +534,25 @@
             }
 
         }
+
+/* Search, analytics, history */
+.dashboard-tools{display:grid;grid-template-columns:minmax(220px,1fr);gap:12px;margin:0 0 20px}
+.search-box{width:100%;padding:13px 15px;border:1px solid #d9dfdf;border-radius:8px;font-size:15px;background:#fff}
+.section-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 4px 18px rgba(0,0,0,.04)}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.stat-card{background:#fff;border:1px solid #e7eceb;border-radius:10px;padding:18px}
+.stat-card span{display:block;color:#777;font-size:13px;margin-bottom:8px}.stat-card strong{font-size:27px;color:#2c514e}
+.chart-bars{display:flex;align-items:flex-end;gap:12px;min-height:175px;padding:15px 5px 0;border-bottom:1px solid #ddd}
+.chart-day{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:165px;gap:7px}
+.chart-bar{width:min(42px,80%);min-height:3px;border-radius:6px 6px 0 0;background:#2c514e;transition:height .2s}
+.chart-count{font-size:12px;color:#555}.chart-label,.history-meta{font-size:12px;color:#777}
+.history-list{display:grid;gap:10px}.history-item{border:1px solid #e6e9e9;border-radius:8px;padding:13px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.history-item strong{display:block;margin-bottom:4px}.history-badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold;background:#e9f5ef;color:#26734d;white-space:nowrap}
+.history-badge.deleted{background:#fdecec;color:#b42318}.delete-order-btn{border:0;background:#b42318;color:#fff;border-radius:6px;padding:9px 12px;font-weight:bold;cursor:pointer;margin-top:12px}
+.delete-order-btn:disabled{opacity:.55;cursor:wait}.empty-history{color:#777;text-align:center;padding:22px 10px}
+@media(max-width:700px){.stats-grid{grid-template-columns:1fr}.history-item{flex-direction:column}.chart-bars{gap:5px}.chart-label{font-size:10px}}
+
     </style>
 
 </head>
@@ -554,20 +600,18 @@
             </h2>
 
             <p>
-                Enter your admin password to view orders.
+                Sign in with the admin account created in Firebase Authentication.
             </p>
 
-
-            <input type="password" id="adminPassword" placeholder="Admin password">
-
+            <input type="email" id="adminEmail" placeholder="Admin email" autocomplete="username">
+            <input type="password" id="adminPassword" placeholder="Admin password" autocomplete="current-password">
 
             <button type="button" id="loginBtn">
                 Login
             </button>
 
-
             <div class="login-error" id="loginError">
-                Incorrect admin password.
+                Login failed. Check the email/password and Firebase Authentication settings.
             </div>
 
         </div>
@@ -580,6 +624,7 @@
     ========================= -->
 
     <main class="dashboard" id="dashboard">
+        <button id="logoutBtn" type="button" style="margin:12px 0;padding:10px 16px;cursor:pointer;">Logout</button>
 
         <div class="dashboard-top">
 
@@ -603,13 +648,30 @@
         </div>
 
 
-        <div class="orders-container" id="ordersContainer">
-
-            <div class="loading">
-                Loading orders...
-            </div>
-
+        <div class="dashboard-tools">
+            <input type="search" class="search-box" id="orderSearch"
+              placeholder="Search by order ID, customer, email, phone, or product...">
         </div>
+
+        <section class="section-card">
+          <div class="section-title"><h2>Order Analytics</h2><span class="history-meta">Orders received in the last 7 days</span></div>
+          <div class="stats-grid">
+            <div class="stat-card"><span>Total active orders</span><strong id="activeOrderStat">0</strong></div>
+            <div class="stat-card"><span>Orders received today</span><strong id="todayOrderStat">0</strong></div>
+            <div class="stat-card"><span>Orders deleted</span><strong id="deletedOrderStat">0</strong></div>
+          </div>
+          <div class="chart-bars" id="orderChart"><div class="loading">Loading chart...</div></div>
+        </section>
+
+        <div class="section-title"><h2>Current Orders</h2><span class="history-meta">Deleted orders are recorded in history.</span></div>
+        <div class="orders-container" id="ordersContainer">
+          <div class="loading">Loading orders...</div>
+        </div>
+
+        <section class="section-card" id="historySection">
+          <div class="section-title"><h2>Order History / Activity Log</h2><span class="history-meta">Received orders and deleted-order records</span></div>
+          <div class="history-list" id="historyContainer"><div class="loading">Loading history...</div></div>
+        </section>
 
     </main>
 
@@ -628,13 +690,25 @@
             initializeApp
         } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
         import {
             getFirestore,
             collection,
             getDocs,
+            getDoc,
             query,
-            orderBy
+            orderBy,
+            deleteDoc,
+            doc,
+            addDoc,
+            serverTimestamp,
+            writeBatch
         } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 
@@ -669,17 +743,11 @@
             initializeApp(firebaseConfig);
 
 
-        const db =
-            getFirestore(app);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
 
-
-        /* =========================================
-           ADMIN PASSWORD
-        ========================================= */
-
-        const ADMIN_PASSWORD =
-            "7890Makki$";
-
+        // IMPORTANT: No password is stored in this HTML or in Firestore.
+        // Firebase Authentication securely manages the email/password.
 
         /* =========================================
            ELEMENTS
@@ -697,10 +765,8 @@
             );
 
 
-        const adminPassword =
-            document.getElementById(
-                "adminPassword"
-            );
+        const adminEmail = document.getElementById("adminEmail");
+        const adminPassword = document.getElementById("adminPassword");
 
 
         const loginBtn =
@@ -732,240 +798,420 @@
                 "refreshBtn"
             );
 
+        const orderSearch = document.getElementById("orderSearch");
+        const historyContainer = document.getElementById("historyContainer");
+        const orderChart = document.getElementById("orderChart");
+        const activeOrderStat = document.getElementById("activeOrderStat");
+        const todayOrderStat = document.getElementById("todayOrderStat");
+        const deletedOrderStat = document.getElementById("deletedOrderStat");
 
-        /* =========================================
-           LOGIN
-        ========================================= */
-
-        function login() {
-
-            if (
-                adminPassword.value ===
-                ADMIN_PASSWORD
-            ) {
-
-                loginContainer.style.display =
-                    "none";
-
-                dashboard.style.display =
-                    "block";
-
-                sessionStorage.setItem(
-                    "admin_logged_in",
-                    "true"
-                );
-
-                loadOrders();
-
-            } else {
-
-                loginError.style.display =
-                    "block";
-
-            }
-
-        }
-
-
-        loginBtn.addEventListener(
-            "click",
-            login
-        );
-
-
-        adminPassword.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Enter") {
-
-                    login();
-
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", async () => {
+                try {
+                    await signOut(auth);
+                } catch (error) {
+                    console.error("Logout failed:", error);
+                    alert("Could not log out. Please try again.");
                 }
-
-            }
-        );
+            });
+        }
+        let cachedOrders = [];
+        let deletedHistory = [];
 
 
         /* =========================================
-           CHECK EXISTING LOGIN
+           FIREBASE AUTHENTICATION LOGIN
         ========================================= */
 
-        if (
-            sessionStorage.getItem(
-                "admin_logged_in"
-            ) === "true"
-        ) {
+        async function login() {
+            loginError.style.display = "none";
+            loginBtn.disabled = true;
+            loginBtn.textContent = "Signing in...";
 
-            loginContainer.style.display =
-                "none";
-
-            dashboard.style.display =
-                "block";
-
-            loadOrders();
-
+            try {
+                await signInWithEmailAndPassword(
+                    auth,
+                    adminEmail.value.trim(),
+                    adminPassword.value
+                );
+                // onAuthStateChanged below reveals the dashboard.
+            } catch (error) {
+                console.error("Firebase admin login failed:", error);
+                loginError.textContent =
+                    error.code === "auth/invalid-credential" ||
+                    error.code === "auth/wrong-password" ||
+                    error.code === "auth/user-not-found"
+                        ? "Incorrect admin email or password."
+                        : "Login failed: " + (error.message || "Check Firebase settings.");
+                loginError.style.display = "block";
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = "Login";
+            }
         }
 
+        loginBtn.addEventListener("click", login);
+        [adminEmail, adminPassword].forEach(input => {
+            input.addEventListener("keydown", event => {
+                if (event.key === "Enter") login();
+            });
+        });
+
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                loginContainer.style.display = "none";
+                dashboard.style.display = "block";
+                loadOrders();
+            } else {
+                loginContainer.style.display = "flex";
+                dashboard.style.display = "none";
+            }
+        });
 
         /* =========================================
            LOAD ORDERS
         ========================================= */
 
+
         async function loadOrders() {
 
-            ordersContainer.innerHTML = `
+            ordersContainer.innerHTML =
+                '<div class="loading">Loading orders...</div>';
 
-                <div class="loading">
-                    Loading orders...
-                </div>
-
-            `;
-
-
+            /* ---- 1) ORDERS ---- */
             try {
 
-                let snapshot;
+                // orderBy nahi lagaya, taake createdAt ke baghair orders bhi aayein.
+                // Sorting neeche JS me hoti hai.
+                const snapshot =
+                    await getDocs(collection(db, "orders"));
 
+                cachedOrders = [];
 
-                /* =================================
-                   NEWEST ORDERS FIRST
-                ================================= */
-
-                try {
-
-                    const ordersQuery =
-                        query(
-                            collection(
-                                db,
-                                "orders"
-                            ),
-                            orderBy(
-                                "createdAt",
-                                "desc"
-                            )
-                        );
-
-
-                    snapshot =
-                        await getDocs(
-                            ordersQuery
-                        );
-
-                } catch (sortError) {
-
-                    console.warn(
-                        "Could not sort orders. Loading normally.",
-                        sortError
-                    );
-
-
-                    snapshot =
-                        await getDocs(
-                            collection(
-                                db,
-                                "orders"
-                            )
-                        );
-
-                }
-
-
-                if (snapshot.empty) {
-
-                    orderCount.textContent =
-                        "0 orders found";
-
-
-                    ordersContainer.innerHTML = `
-
-                        <div class="no-orders">
-
-                            <h3>
-                                No Orders Yet
-                            </h3>
-
-                            <p style="margin-top:8px;">
-                                Customer orders will appear here.
-                            </p>
-
-                        </div>
-
-                    `;
-
-                    return;
-
-                }
-
-
-                orderCount.textContent =
-                    snapshot.size +
-                    " order" +
-                    (snapshot.size === 1
-                        ? ""
-                        : "s") +
-                    " found";
-
-
-                ordersContainer.innerHTML = "";
-
-
-                snapshot.forEach(function (doc) {
-
-                    const order =
-                        doc.data();
-
-
-                    const card =
-                        createOrderCard(
-                            doc.id,
-                            order
-                        );
-
-
-                    ordersContainer.appendChild(
-                        card
-                    );
-
+                snapshot.forEach(function (orderDoc) {
+                    cachedOrders.push({
+                        id: orderDoc.id,
+                        data: orderDoc.data()
+                    });
                 });
 
+                // newest first
+                cachedOrders.sort(function (a, b) {
+                    const da = dateValue(a.data.createdAt);
+                    const dbb = dateValue(b.data.createdAt);
+                    return (dbb ? dbb.getTime() : 0) - (da ? da.getTime() : 0);
+                });
+
+                orderCount.textContent =
+                    cachedOrders.length + " active order" +
+                    (cachedOrders.length === 1 ? "" : "s") + " found";
+
+                console.log(
+                    "Orders loaded:", cachedOrders.length,
+                    "| UID:", auth.currentUser && auth.currentUser.uid
+                );
+
+                renderOrders();
 
             } catch (error) {
 
-                console.error(
-                    "Could not load orders:",
-                    error
-                );
+                console.error("Could not load orders:", error);
 
+                orderCount.textContent = "Could not load orders";
 
-                orderCount.textContent =
-                    "Could not load orders";
+                const uid = auth.currentUser ? auth.currentUser.uid : "none";
 
+                let hint = "Check your Firestore database and security rules.";
+
+                if (error.code === "permission-denied") {
+                    hint =
+                        "Firestore Rules is account ko admin nahi maan rahe. " +
+                        "Upar jo \"Your UID\" likha hai wo Rules wale UID se same hona chahiye, " +
+                        "aur Rules me <b>Publish</b> dabana zaroori hai. " +
+                        "Rules usi project (" + escapeHTML(firebaseConfig.projectId) + ") ke hon.";
+                }
 
                 ordersContainer.innerHTML = `
-
-                    <div class="no-orders">
-
-                        <h3>
-                            Firebase Error
-                        </h3>
-
-                        <p style="margin-top:10px;">
-                            ${escapeHTML(error.message)}
-                        </p>
-
-                        <p style="margin-top:10px;">
-                            Check your Firestore database and security rules.
-                        </p>
-
+                    <div class="error-box">
+                        <h3>Firebase Error</h3>
+                        <p><b>Code:</b> <code>${escapeHTML(error.code || "unknown")}</code></p>
+                        <p><b>Message:</b> ${escapeHTML(error.message)}</p>
+                        <p><b>Logged in UID:</b> <code>${escapeHTML(uid)}</code></p>
+                        <p><b>Project:</b> <code>${escapeHTML(firebaseConfig.projectId)}</code></p>
+                        <p style="margin-top:10px;">${hint}</p>
                     </div>
-
                 `;
 
+                return;
+            }
+
+            /* ---- 2) HISTORY + ANALYTICS (alag, taake orders na mitein) ---- */
+            try {
+                await loadHistory();
+                renderAnalytics();
+            } catch (error) {
+                console.error("History/analytics error:", error);
             }
 
         }
 
+
+
+        /* SEARCH, HISTORY, ANALYTICS AND DELETE */
+        function onlyDigits(value) {
+            return String(value || "").replace(/\D/g, "");
+        }
+
+        function searchableOrderText(id, order) {
+            const c = order.customer || {};
+            const products = Array.isArray(order.products) ? order.products : [];
+            const created = dateValue(order.createdAt);
+
+            return [
+                id,
+                c.firstName,
+                c.lastName,
+                (c.firstName || "") + " " + (c.lastName || ""),
+                c.email,
+                c.phone,
+                c.city,
+                c.address,
+                c.postalCode,
+                order.status || "New",
+                order.paymentMethod,
+                formatPayment(order.paymentMethod),
+                formatPrice(order.total || 0),
+                created ? created.toLocaleString() : "",
+                ...products.map(p => p.title || "")
+            ].join(" ").toLowerCase();
+        }
+
+        function renderOrders() {
+            const rawTerm = (orderSearch.value || "").trim().toLowerCase();
+            const terms = rawTerm.split(/\s+/).filter(Boolean);
+
+            // Har word match hona chahiye (e.g. "ali karachi" => naam me ali AUR city me karachi)
+            const filtered = cachedOrders.filter(item => {
+                const text = searchableOrderText(item.id, item.data);
+                const phoneDigits = onlyDigits((item.data.customer || {}).phone);
+
+                return terms.every(term => {
+                    if (text.includes(term)) return true;
+
+                    // phone: "0300-123 4567" type karo to bhi mil jaye
+                    const digits = onlyDigits(term);
+                    return digits.length >= 3 && phoneDigits.includes(digits);
+                });
+            });
+
+            orderCount.textContent = terms.length
+                ? "Showing " + filtered.length + " of " + cachedOrders.length + " order" + (cachedOrders.length === 1 ? "" : "s")
+                : cachedOrders.length + " active order" + (cachedOrders.length === 1 ? "" : "s") + " found";
+
+            ordersContainer.innerHTML = "";
+
+            if (!filtered.length) {
+                ordersContainer.innerHTML = cachedOrders.length === 0
+                    ? '<div class="no-orders"><h3>No orders yet</h3><p style="margin-top:8px;">Orders collection is empty. New checkout orders will appear here.</p></div>'
+                    : '<div class="no-orders"><h3>No matching orders</h3><p style="margin-top:8px;">No order matches "' + escapeHTML(rawTerm) + '". Try a name, email, phone, city, product or order ID.</p></div>';
+                return;
+            }
+
+            filtered.forEach(item => ordersContainer.appendChild(createOrderCard(item.id, item.data)));
+        }
+
+        function dateValue(value) {
+            if (value && typeof value.toDate === "function") return value.toDate();
+            if (typeof value === "string" || typeof value === "number") {
+                const d = new Date(value);
+                if (!Number.isNaN(d.getTime())) return d;
+            }
+            return null;
+        }
+
+        async function loadHistory() {
+            try {
+                const q = query(collection(db,"orderHistory"),orderBy("actionAt","desc"));
+                const snap = await getDocs(q);
+                deletedHistory = [];
+                snap.forEach(hdoc => {
+                    const entry = hdoc.data();
+                    if (entry.action === "deleted") deletedHistory.push({id:hdoc.id,...entry});
+                });
+                renderHistory();
+            } catch (error) {
+                console.warn("Could not load orderHistory; check Firestore rules.",error);
+                deletedHistory = [];
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            const events = [];
+            const receivedIds = new Set();
+
+            function addReceived(item) {
+                if (!item || !item.id || receivedIds.has(item.id)) return;
+                receivedIds.add(item.id);
+                const o = item.data || {}, c = o.customer || {};
+                const name = ((c.firstName||"")+" "+(c.lastName||"")).trim() || "Unknown customer";
+                const products = Array.isArray(o.products) ? o.products.length : 0;
+                events.push({action:"received",orderId:item.id,name,date:dateValue(o.createdAt),
+                    detail:products+" product line(s) · "+formatPrice(o.total||0)});
+            }
+
+            cachedOrders.forEach(addReceived);
+            deletedHistory.forEach(entry => {
+                if (entry.orderSnapshot) addReceived({id:entry.orderId,data:entry.orderSnapshot});
+                const o = entry.orderSnapshot || {}, c = o.customer || {};
+                const name = ((c.firstName||"")+" "+(c.lastName||"")).trim() || "Unknown customer";
+                events.push({action:"deleted",orderId:entry.orderId||"Unknown order",name,
+                    date:dateValue(entry.actionAt),detail:"Deleted by "+(entry.deletedBy||"admin")+" · "+formatPrice(o.total||0)});
+            });
+
+            events.sort((a,b)=>(b.date?.getTime()||0)-(a.date?.getTime()||0));
+            historyContainer.innerHTML = "";
+            if (!events.length) {
+                historyContainer.innerHTML = '<div class="empty-history">No order activity found yet.</div>';
+                return;
+            }
+            events.slice(0,100).forEach(event => {
+                const row = document.createElement("div");
+                row.className = "history-item";
+                const dateText = event.date ? event.date.toLocaleString() : "Date unavailable";
+                row.innerHTML = `<div><strong>${escapeHTML(event.action==="deleted"?"Order deleted":"Order received")} · ${escapeHTML(event.orderId)}</strong>
+                  <div>${escapeHTML(event.name)} — ${escapeHTML(event.detail)}</div>
+                  <div class="history-meta">${escapeHTML(dateText)}</div></div>
+                  <span class="history-badge ${event.action==="deleted"?"deleted":""}">${event.action==="deleted"?"DELETED":"RECEIVED"}</span>`;
+                historyContainer.appendChild(row);
+            });
+        }
+
+        function renderAnalytics() {
+            const now = new Date();
+            const today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+            const allOrders = new Map();
+            cachedOrders.forEach(item => allOrders.set(item.id,item));
+            deletedHistory.forEach(entry => {
+                if (entry.orderSnapshot && entry.orderId && !allOrders.has(entry.orderId)) {
+                    allOrders.set(entry.orderId,{id:entry.orderId,data:entry.orderSnapshot});
+                }
+            });
+            const receivedOrders = Array.from(allOrders.values());
+            const todayCount = receivedOrders.filter(item => {
+                const d = dateValue(item.data.createdAt); return d && d >= today;
+            }).length;
+            activeOrderStat.textContent = String(cachedOrders.length);
+            todayOrderStat.textContent = String(todayCount);
+            deletedOrderStat.textContent = String(deletedHistory.length);
+
+            const days = [];
+            for (let i=6;i>=0;i--) {
+                const day = new Date(now.getFullYear(),now.getMonth(),now.getDate()-i);
+                const next = new Date(day.getFullYear(),day.getMonth(),day.getDate()+1);
+                const count = receivedOrders.filter(item => {
+                    const d = dateValue(item.data.createdAt); return d && d >= day && d < next;
+                }).length;
+                days.push({label:day.toLocaleDateString(undefined,{weekday:"short"}),count});
+            }
+            const max = Math.max(1,...days.map(d=>d.count));
+            orderChart.innerHTML = days.map(d=>`<div class="chart-day"><span class="chart-count">${d.count}</span>
+              <div class="chart-bar" style="height:${Math.max(3,d.count/max*112)}px" title="${d.count} order(s)"></div>
+              <span class="chart-label">${escapeHTML(d.label)}</span></div>`).join("");
+        }
+
+        async function deleteOrder(orderId, button) {
+            const item = cachedOrders.find(order => order.id === orderId);
+            if (!item) return;
+
+            const order = item.data || {};
+            const customer = order.customer || {};
+            const customerName =
+                ((customer.firstName || "") + " " + (customer.lastName || "")).trim() ||
+                "this customer";
+
+            if (!confirm(
+                `Delete order ${orderId} for ${customerName}?
+
+` +
+                "The order will be saved in history. Catalog products will only be deleted " +
+                "when an order item contains an exact product document ID and that document exists."
+            )) return;
+
+            button.disabled = true;
+            button.textContent = "Deleting...";
+
+            try {
+                // Identify catalog product document IDs only from explicit ID fields.
+                // Never guess from title, SKU, product name, or image URL.
+                const orderProducts = Array.isArray(order.products) ? order.products : [];
+                const candidateIds = [...new Set(orderProducts.flatMap(product => {
+                    if (!product || typeof product !== "object") return [];
+                    return [
+                        product.productDocId,
+                        product.productDocumentId,
+                        product.firestoreProductId,
+                        product.productId,
+                        product.product_id,
+                        product.id
+                    ].filter(value => typeof value === "string" && value.trim() !== "")
+                     .map(value => value.trim());
+                }))];
+
+                // Verify exact document paths before including any product deletion.
+                const verifiedProductRefs = [];
+                for (const productId of candidateIds) {
+                    const productRef = doc(db, "products", productId);
+                    const productSnapshot = await getDoc(productRef);
+                    if (productSnapshot.exists()) {
+                        verifiedProductRefs.push(productRef);
+                    }
+                }
+
+                // Use a single Firestore batch so history, product deletion(s), and
+                // order deletion either all commit or all fail together.
+                const batch = writeBatch(db);
+                const historyRef = doc(collection(db, "orderHistory"));
+
+                batch.set(historyRef, {
+                    action: "deleted",
+                    orderId,
+                    orderSnapshot: order,
+                    deletedProductDocumentIds: verifiedProductRefs.map(ref => ref.id),
+                    deletedBy: auth.currentUser ? auth.currentUser.uid : "unknown",
+                    deletedByEmail: auth.currentUser ? (auth.currentUser.email || "") : "",
+                    actionAt: serverTimestamp()
+                });
+
+                verifiedProductRefs.forEach(productRef => batch.delete(productRef));
+                batch.delete(doc(db, "orders", orderId));
+
+                await batch.commit();
+                await loadOrders();
+
+                if (verifiedProductRefs.length > 0) {
+                    alert(`Order deleted and ${verifiedProductRefs.length} matching catalog product document(s) deleted. History was saved.`);
+                } else {
+                    alert("Order deleted and history saved. No exact existing product document IDs were found, so no catalog products were deleted.");
+                }
+            } catch (error) {
+                console.error("Delete order failed:", error);
+                alert(
+                    "Could not complete deletion. No partial batch deletion was committed. " +
+                    "Check Firestore rules for orders, products, and orderHistory."
+                );
+                button.disabled = false;
+                button.textContent = "Delete Order";
+            }
+        }
+
+        ordersContainer.addEventListener("click",event=>{
+            const button = event.target.closest("[data-delete-order]");
+            if (button) deleteOrder(button.dataset.deleteOrder,button);
+        });
+        orderSearch.addEventListener("input", renderOrders);
+        orderSearch.addEventListener("search", renderOrders);
 
         /* =========================================
            CREATE ORDER CARD
@@ -1038,22 +1284,15 @@
                     <div class="product-row">
 
                         <img
-                            src="${escapeAttribute(
-                    product.image || ""
-                )}"
-                            alt="${escapeAttribute(
-                    product.title || "Product"
-                )}"
+                            src="${escapeAttribute(product.image || "")}"
+                            alt="${escapeAttribute(product.title || "Product")}"
                             onerror="this.style.display='none'"
                         >
 
                         <div class="product-details">
 
                             <h4>
-                                ${escapeHTML(
-                    product.title ||
-                    "Product"
-                )}
+                                ${escapeHTML(product.title || "Product")}
                             </h4>
 
                             <p>
@@ -1066,9 +1305,7 @@
 
                         <div class="product-total">
 
-                            ${formatPrice(
-                    itemTotal
-                )}
+                            ${formatPrice(itemTotal)}
 
                         </div>
 
@@ -1107,10 +1344,7 @@
 
                     <div class="status">
 
-                        ${escapeHTML(
-                order.status ||
-                "New"
-            )}
+                        ${escapeHTML(order.status || "New")}
 
                     </div>
 
@@ -1128,16 +1362,10 @@
                         <span>
 
                             ${escapeHTML(
-                (
-                    customer.firstName ||
-                    ""
-                ) +
-                " " +
-                (
-                    customer.lastName ||
-                    ""
-                )
-            )}
+                                (customer.firstName || "") +
+                                " " +
+                                (customer.lastName || "")
+                            )}
 
                         </span>
 
@@ -1152,10 +1380,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                customer.phone ||
-                "-"
-            )}
+                            ${escapeHTML(customer.phone || "-")}
 
                         </span>
 
@@ -1170,10 +1395,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                customer.email ||
-                "-"
-            )}
+                            ${escapeHTML(customer.email || "-")}
 
                         </span>
 
@@ -1188,10 +1410,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                customer.city ||
-                "-"
-            )}
+                            ${escapeHTML(customer.city || "-")}
 
                         </span>
 
@@ -1206,10 +1425,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                customer.address ||
-                "-"
-            )}
+                            ${escapeHTML(customer.address || "-")}
 
                         </span>
 
@@ -1224,10 +1440,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                customer.postalCode ||
-                "-"
-            )}
+                            ${escapeHTML(customer.postalCode || "-")}
 
                         </span>
 
@@ -1242,11 +1455,7 @@
 
                         <span>
 
-                            ${escapeHTML(
-                formatPayment(
-                    order.paymentMethod
-                )
-            )}
+                            ${escapeHTML(formatPayment(order.paymentMethod))}
 
                         </span>
 
@@ -1278,9 +1487,7 @@
                             </span>
 
                             <strong>
-                                ${formatPrice(
-                order.subtotal || 0
-            )}
+                                ${formatPrice(order.subtotal || 0)}
                             </strong>
 
                         </div>
@@ -1295,11 +1502,8 @@
                             <strong>
 
                                 ${Number(order.shipping) === 0
-                    ? "FREE"
-                    : formatPrice(
-                        order.shipping || 0
-                    )
-                }
+                                    ? "FREE"
+                                    : formatPrice(order.shipping || 0)}
 
                             </strong>
 
@@ -1313,15 +1517,16 @@
                             </span>
 
                             <strong>
-                                ${formatPrice(
-                    order.total || 0
-                )}
+                                ${formatPrice(order.total || 0)}
                             </strong>
 
                         </div>
 
                     </div>
 
+                </div>
+                <div style="display:flex;justify-content:flex-end;">
+                    <button type="button" class="delete-order-btn" data-delete-order="${escapeAttribute(orderId)}">Delete Order</button>
                 </div>
 
             `;
